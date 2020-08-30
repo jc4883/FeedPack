@@ -105,7 +105,6 @@ export const createLead = (data) => (dispatch) => {
       }
     })
     .then((data) => {
-      console.log("success");
       dispatch(
         createMessage({
           createdLead: "Successfully Created Lead",
@@ -114,9 +113,7 @@ export const createLead = (data) => (dispatch) => {
       dispatch(receiveCreate(data));
     })
     .catch((err) => {
-      console.log("fail");
       err.then((messages) => {
-        console.log("fail2");
         dispatch(getErrors(messages, status));
       });
     });
