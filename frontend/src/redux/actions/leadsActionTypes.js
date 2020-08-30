@@ -1,0 +1,11 @@
+export const REQUEST_LEADS = "REQUEST_LEADS";
+export const RECEIVE_LEADS = "RECEIVE_LEADS";
+
+export const REQUEST_LEAD = "REQUEST_LEAD";
+export const RECEIVE_LEAD = "RECEIVE_LEAD";
+
+export const REQUEST_DELETE = "REQUEST_DELETE";
+export const RECEIVE_DELETE = "RECEIVE_DELETE";
+
+export const REQUEST_CREATE = "REQUEST_CREATE";
+export const RECEIVE_CREATE = "RECEIVE_CREATE";
