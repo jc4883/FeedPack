@@ -1,7 +1,18 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackTemplate = require("html-webpack-template");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: HtmlWebpackTemplate,
+      appMountId: "app",
+      filename: "../../templates/frontend/index.html",
+    }),
+  ],
   module: {
     rules: [
       {
@@ -19,7 +30,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: "main.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "static/frontend"),
   },
 };

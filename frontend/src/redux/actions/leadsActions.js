@@ -53,13 +53,24 @@ export const receiveCreate = (payload) => ({
 
 // Thunk action creators
 export const getLeads = () => (dispatch) => {
+  let status = null;
   dispatch(requestLeads());
   fetch("api/lead")
     .then((res) => {
-      return res.json();
+      status = res.status;
+      if (!res.ok) {
+        throw res.json();
+      } else {
+        return res.json();
+      }
     })
     .then((data) => {
       dispatch(receiveLeads(data));
+    })
+    .catch((err) => {
+      err.then((messages) => {
+        dispatch(getErrors(messages, status));
+      });
     });
 };
 
@@ -76,15 +87,20 @@ export const deleteLead = (id) => (dispatch) => {
   dispatch(requestDelete(id));
   fetch(`api/lead/${id}`, {
     method: "DELETE",
-  }).then(() => {
+  }).then((res) => {
+    // TODO: dispatch createMessage on successful delete,
+    // dispatch getErrors on unsuccess
+  });
+};
+
+/*
     dispatch(
       createMessage({
         deletedLead: "Successfully Deleted Lead",
       })
     );
     dispatch(receiveDelete(id));
-  });
-};
+*/
 
 export const createLead = (data) => (dispatch) => {
   let status = null;
