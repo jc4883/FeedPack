@@ -7,21 +7,20 @@ from rest_framework import status, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from .serializers import LeadSerializer, UserSerializer
 from .models import Lead
+from .serializers import LeadSerializer
 
-
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer 
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 class LeadList(generics.ListCreateAPIView):
-    queryset = Lead.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = LeadSerializer
+
+    def get_queryset(self):
+        return self.request.user.leads.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class LeadDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Lead.objects.all()

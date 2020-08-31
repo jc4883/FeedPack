@@ -38,11 +38,8 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = []
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        ('knox.auth.TokenAuthentication'),
     ]
 }
 
@@ -57,7 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'leads.apps.LeadsConfig',
-    'frontend.apps.FrontendConfig'
+    'frontend.apps.FrontendConfig',
+    'knox',
+    'accounts'
 ]
 
 MIDDLEWARE = [

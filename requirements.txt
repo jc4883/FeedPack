@@ -9,13 +9,16 @@ black==19.10b0
 bleach==3.1.5
 bumpversion==0.5.3
 certifi==2020.6.20
+cffi==1.14.2
 chardet==3.0.4
 click==7.1.2
 coverage==5.0.3
 coveralls==1.10.0
+cryptography==3.1
 distlib==0.3.1
 Django==3.1
 django-environ==0.4.5
+django-rest-knox==4.1.0
 djangorestframework==3.11.1
 doc8==0.8.0
 docopt==0.6.2
@@ -56,6 +59,7 @@ pluggy==0.13.1
 psycopg2==2.8.5
 py==1.9.0
 pycodestyle==2.5.0
+pycparser==2.20
 pydocstyle==5.0.2
 pyflakes==2.1.1
 Pygments==2.6.1
