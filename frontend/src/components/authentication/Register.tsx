@@ -7,7 +7,6 @@ const Register = () => {
 
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log("submit register form!");
   };
 
   const onChange = (e: SyntheticEvent) => {

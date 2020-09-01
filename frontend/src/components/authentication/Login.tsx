@@ -1,12 +1,24 @@
 import React, { useState, SyntheticEvent } from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-const Login = () => {
+import { MyReduxState } from "../../redux/reducers/rootReducerType";
+
+import { login } from "../../redux/actions/authenticationActions";
+
+interface ComponentProps {
+  login: (username: string, password: string) => void;
+  isAuthenticated: boolean | null;
+}
+
+const Login = (props: ComponentProps) => {
+  const { login, isAuthenticated } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log("submit login form!");
+    login(username, password);
   };
 
   const onChange = (e: SyntheticEvent) => {
@@ -14,12 +26,16 @@ const Login = () => {
     switch (target.name) {
       case "username":
         setUsername(target.value);
+        break;
       case "password":
         setPassword(target.value);
+        break;
     }
   };
 
-  return (
+  return isAuthenticated ? (
+    <Redirect to="/" />
+  ) : (
     <div>
       <h1>Login</h1>
       <form onSubmit={onSubmit}>
@@ -41,4 +57,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state: MyReduxState) => ({
+  isAuthenticated: state.authentication.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

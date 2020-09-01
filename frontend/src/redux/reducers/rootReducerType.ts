@@ -16,4 +16,13 @@ export interface MyReduxState {
   leads: {
     leads: Lead[];
   };
+  authentication: {
+    token: string;
+    isAuthenticated: boolean | null;
+    isLoading: boolean;
+    user: null | {
+      username: string;
+      email: string;
+    };
+  };
 }

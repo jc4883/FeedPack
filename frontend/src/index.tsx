@@ -10,7 +10,7 @@ import AlertTemplate from "react-alert-template-basic";
 
 import App from "./components/App";
 
-const store = configureStore();
+export const store = configureStore();
 
 const alertOptions = {
   timeout: 3000,
