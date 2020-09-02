@@ -6,6 +6,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
 } from "../actions/authenticationActionTypes";
 
 const initialState = {
@@ -34,7 +36,8 @@ export const authentication = (state = initialState, action) => {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT_FAIL:
-    case LOGOUT_SUCCESS: {
+    case LOGOUT_SUCCESS:
+    case REGISTER_FAIL: {
       localStorage.removeItem("token");
       return {
         ...state,
@@ -44,6 +47,7 @@ export const authentication = (state = initialState, action) => {
         isLoading: false,
       };
     }
+    case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
       return {

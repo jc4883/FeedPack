@@ -6,6 +6,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
 } from "./authenticationActionTypes";
 
 import { getErrors } from "./errorsActions";
@@ -13,16 +15,7 @@ import { getErrors } from "./errorsActions";
 export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
-  const token = getState().authentication.token;
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
+  const config = getConfig(getState);
 
   let status = null;
   fetch("/api/auth/user", config)
@@ -85,20 +78,45 @@ export const login = (username, password) => (dispatch) => {
     });
 };
 
-export const logout = () => (dispatch, getState) => {
-  dispatch({ type: USER_LOADING });
-
-  const token = getState().authentication.token;
+export const register = ({ username, password, email }) => (dispatch) => {
   const config = {
     method: "POST",
+    body: JSON.stringify({ username, password, email }),
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
+  let status = null;
+  fetch("/api/auth/register", config)
+    .then((res) => {
+      status = res.status;
+      if (!res.ok) {
+        throw res.json();
+      } else {
+        return res.json();
+      }
+    })
+    .then((data) => {
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch((err) => {
+      err.then((messages) => {
+        dispatch(getErrors(messages, status));
+        dispatch({
+          type: REGISTER_FAIL,
+        });
+      });
+    });
+};
+
+export const logout = () => (dispatch, getState) => {
+  dispatch({ type: USER_LOADING });
+
+  const config = getConfig(getState);
 
   let status = null;
   fetch("/api/auth/logout/", config)
@@ -123,4 +141,18 @@ export const logout = () => (dispatch, getState) => {
         });
       });
     });
+};
+
+export const getConfig = (getState) => {
+  const token = getState().authentication.token;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+  return config;
 };

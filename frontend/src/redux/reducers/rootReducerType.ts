@@ -10,6 +10,7 @@ export interface MyReduxState {
       email?: string[];
       name?: string[];
       message?: string[];
+      non_field_errors?: string[];
     };
     status: number;
   };

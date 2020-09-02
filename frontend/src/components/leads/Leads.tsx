@@ -5,7 +5,6 @@ import { MyReduxState } from "../../redux/reducers/rootReducerType";
 
 import {
   getLeads,
-  getLead,
   deleteLead,
   createLead,
 } from "../../redux/actions/leadsActions";
@@ -18,13 +17,12 @@ import "./Leads.scss";
 interface ReduxProps {
   leads: any[];
   getLeads: () => void;
-  getLead: (id: number) => void;
   deleteLead: (id: number) => void;
   createLead: (data: { email: string; name: string; message: string }) => void;
 }
 
 const Leads = (props: ReduxProps) => {
-  const { leads, getLeads, getLead, deleteLead, createLead } = props;
+  const { leads, getLeads, deleteLead, createLead } = props;
 
   useEffect(() => {
     getLeads();
@@ -56,7 +54,6 @@ const mapStateToProps = (state: MyReduxState) => {
 
 export default connect(mapStateToProps, {
   getLeads,
-  getLead,
   deleteLead,
   createLead,
 })(Leads);

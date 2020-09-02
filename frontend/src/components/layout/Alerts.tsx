@@ -11,6 +11,8 @@ interface ComponentProps {
     email?: string;
     name?: string;
     message?: string;
+    non_field_errors?: string;
+    username?: string;
   };
   messages: {
     createdLead?: string;
@@ -19,13 +21,21 @@ interface ComponentProps {
 }
 
 const Alerts = ({ alert, errors, messages }: ComponentProps) => {
-  const { email, name, message: errorMessage } = errors;
+  const {
+    email,
+    name,
+    non_field_errors,
+    username,
+    message: errorMessage,
+  } = errors;
   const { createdLead, deletedLead } = messages;
 
   useEffect(() => {
     email && alert.error("Email: " + email);
     name && alert.error("Name: " + name);
     errorMessage && alert.error("Message: " + errorMessage);
+    non_field_errors && alert.error(non_field_errors);
+    username && alert.error(username);
   }, [errors]);
 
   useEffect(() => {
