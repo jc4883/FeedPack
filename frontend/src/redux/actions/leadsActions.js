@@ -11,6 +11,7 @@ import {
 
 import { getErrors } from "./errorsActions";
 import { createMessage } from "./messageActions";
+import { getConfig } from "./authenticationActions";
 
 export const requestLeads = () => ({
   type: REQUEST_LEADS,
@@ -52,10 +53,11 @@ export const receiveCreate = (payload) => ({
 });
 
 // Thunk action creators
-export const getLeads = () => (dispatch) => {
+export const getLeads = () => (dispatch, getState) => {
   let status = null;
+  const config = getConfig(getState);
   dispatch(requestLeads());
-  fetch("api/lead")
+  fetch("api/lead", config)
     .then((res) => {
       status = res.status;
       if (!res.ok) {
@@ -74,44 +76,37 @@ export const getLeads = () => (dispatch) => {
     });
 };
 
-export const getLead = (id) => (dispatch) => {
+export const getLead = (id) => (dispatch, getState) => {
   dispatch(requestLead(id));
-  fetch(`api/lead/${id}`, {
-    method: "GET",
-  })
+  const config = getConfig(getState);
+  fetch(`api/lead/${id}`, config)
     .then((res) => res.json())
     .then((data) => dispatch(receiveLead(data)));
 };
 
-export const deleteLead = (id) => (dispatch) => {
+export const deleteLead = (id) => (dispatch, getState) => {
+  const config = getConfig(getState);
+  config.method = "DELETE";
   dispatch(requestDelete(id));
-  fetch(`api/lead/${id}`, {
-    method: "DELETE",
-  }).then((res) => {
+  fetch(`api/lead/${id}`, config).then((res) => {
     // TODO: dispatch createMessage on successful delete,
-    // dispatch getErrors on unsuccess
-  });
-};
-
-/*
     dispatch(
       createMessage({
         deletedLead: "Successfully Deleted Lead",
       })
     );
     dispatch(receiveDelete(id));
-*/
+  });
+};
 
-export const createLead = (data) => (dispatch) => {
+export const createLead = (data) => (dispatch, getState) => {
   let status = null;
+  const config = getConfig(getState);
+  config.method = "POST";
+  config.body = JSON.stringify(data);
+
   dispatch(requestCreate(data));
-  fetch("api/lead/", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  fetch("api/lead/", config)
     .then((res) => {
       status = res.status;
       if (!res.ok) {
