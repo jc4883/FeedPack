@@ -1,0 +1,26 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__header {
+  color: red;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.register__submit {
+  padding: 10px 0;
+  margin: 10px;
+}

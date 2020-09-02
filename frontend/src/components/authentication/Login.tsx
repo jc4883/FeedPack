@@ -6,13 +6,18 @@ import { MyReduxState } from "../../redux/reducers/rootReducerType";
 
 import { login } from "../../redux/actions/authenticationActions";
 
+import Spinner from "../common/Spinner";
+
+import "./Login.scss";
+
 interface ComponentProps {
   login: (username: string, password: string) => void;
   isAuthenticated: boolean | null;
+  isLoading: boolean;
 }
 
 const Login = (props: ComponentProps) => {
-  const { login, isAuthenticated } = props;
+  const { login, isAuthenticated, isLoading } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -36,29 +41,42 @@ const Login = (props: ComponentProps) => {
   return isAuthenticated ? (
     <Redirect to="/" />
   ) : (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          value={username}
-          type="text"
-          name="username"
-          onChange={onChange}
-        />
-        <input
-          value={password}
-          type="text"
-          name="password"
-          onChange={onChange}
-        />
-        <button>Login</button>
+    <div className="login">
+      <h1 className="login__header">Login</h1>
+      <form className="login__form" onSubmit={onSubmit}>
+        <div className="login__field">
+          <span>Username</span>
+          <input
+            value={username}
+            type="text"
+            name="username"
+            onChange={onChange}
+          />
+        </div>
+        <div className="login__field">
+          <span>Password</span>
+          <input
+            value={password}
+            type="password"
+            name="password"
+            onChange={onChange}
+          />
+        </div>
+        <button disabled={isLoading} className="login__submit">
+          Login
+        </button>
+        {isLoading && <Spinner className="login-spinner" />}
       </form>
     </div>
   );
 };
 
-const mapStateToProps = (state: MyReduxState) => ({
-  isAuthenticated: state.authentication.isAuthenticated,
-});
+const mapStateToProps = (state: MyReduxState) => {
+  const { isAuthenticated, isLoading } = state.authentication;
+  return {
+    isAuthenticated,
+    isLoading,
+  };
+};
 
 export default connect(mapStateToProps, { login })(Login);

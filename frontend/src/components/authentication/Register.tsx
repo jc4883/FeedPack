@@ -6,6 +6,8 @@ import { MyReduxState } from "../../redux/reducers/rootReducerType";
 
 import { register } from "../../redux/actions/authenticationActions";
 
+import "./Register.scss";
+
 interface ComponentProps {
   register: (details: {
     username: string;
@@ -45,26 +47,32 @@ const Register = (props: ComponentProps) => {
   return isAuthenticated ? (
     <Redirect to="/" />
   ) : (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={onSubmit}>
-        <span>Username</span>
-        <input
-          value={username}
-          type="text"
-          name="username"
-          onChange={onChange}
-        />
-        <span>Email</span>
-        <input value={email} type="text" name="email" onChange={onChange} />
-        <span>Password</span>
-        <input
-          value={password}
-          type="text"
-          name="password"
-          onChange={onChange}
-        />
-        <button>Register</button>
+    <div className="register">
+      <h1 className="register__header">Register</h1>
+      <form onSubmit={onSubmit} className="register__form">
+        <div className="register__field">
+          <span>Username</span>
+          <input
+            value={username}
+            type="text"
+            name="username"
+            onChange={onChange}
+          />
+        </div>
+        <div className="register__field">
+          <span>Email</span>
+          <input value={email} type="text" name="email" onChange={onChange} />
+        </div>
+        <div className="register__field">
+          <span>Password</span>
+          <input
+            value={password}
+            type="text"
+            name="password"
+            onChange={onChange}
+          />
+        </div>
+        <button className="register__submit">Register</button>
       </form>
     </div>
   );

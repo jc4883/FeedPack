@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  height: 10vh;
+  background-color: bisque;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__title {
+  font-size: 20px;
+  color: red;
+}
+
+.header__links {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header__links__link {
+  margin: 3px;
+}

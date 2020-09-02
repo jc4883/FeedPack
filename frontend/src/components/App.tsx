@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
 
 import { loadUser } from "../redux/actions/authenticationActions";
 
@@ -12,6 +11,8 @@ import Header from "./header/Header";
 import Leads from "./leads/Leads";
 import Register from "./authentication/Register";
 import Login from "./authentication/Login";
+
+import "./App.scss";
 
 const App = () => {
   useEffect(() => {

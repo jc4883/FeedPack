@@ -51,8 +51,9 @@ export const login = (username, password) => (dispatch) => {
       "Content-Type": "application/json",
     },
   };
-
   let status = null;
+
+  dispatch({ type: USER_LOADING });
   fetch("/api/auth/login", config)
     .then((res) => {
       status = res.status;

@@ -4,6 +4,8 @@ import { Route, Redirect } from "react-router-dom";
 
 import { MyReduxState } from "../../redux/reducers/rootReducerType";
 
+import Spinner from "../common/Spinner";
+
 interface ComponentProps {
   component: React.FunctionComponent | React.ClassType<any, any, any>;
   path: string;
@@ -19,7 +21,17 @@ const PrivateRoute = (props: ComponentProps) => {
       path={path}
       render={(props) => {
         if (auth.isLoading) {
-          return <h2>I am loading...</h2>;
+          return (
+            <Spinner
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                opacity: 0.4,
+              }}
+            />
+          );
         } else if (!auth.isAuthenticated) {
           return <Redirect to="/login" />;
         } else {

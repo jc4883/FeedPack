@@ -43,7 +43,7 @@ const Alerts = ({ alert, errors, messages }: ComponentProps) => {
     deletedLead && alert.success(deletedLead);
   }, [messages]);
 
-  return <React.Fragment>I am alerts.</React.Fragment>;
+  return <React.Fragment />;
 };
 
 const mapStateToProps = (state: MyReduxState) => {

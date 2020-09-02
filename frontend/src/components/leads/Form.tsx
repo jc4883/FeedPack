@@ -1,5 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 
+import "./Form.scss";
+
 interface ProvidedProps {
   handleSubmit: (data: {
     email: string;
@@ -39,20 +41,25 @@ const Form = (props: ProvidedProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>email</label>
-      <input value={email} onChange={handleChange} name="email" type="text" />
-      <br />
-      <label>name</label>
-      <input value={name} onChange={handleChange} name="name" type="text" />
-      <br />
-      <label>message</label>
-      <input
-        value={message}
-        onChange={handleChange}
-        name="message"
-        type="text"
-      />
+    <form className="leads-form" onSubmit={handleSubmit}>
+      <h2>New Lead</h2>
+      <div className="leads-form__field">
+        <label>email</label>
+        <input value={email} onChange={handleChange} name="email" type="text" />
+      </div>
+      <div className="leads-form__field">
+        <label>name</label>
+        <input value={name} onChange={handleChange} name="name" type="text" />
+      </div>
+      <div className="leads-form__field">
+        <label>message</label>
+        <input
+          value={message}
+          onChange={handleChange}
+          name="message"
+          type="text"
+        />
+      </div>
       <button>Submit</button>
     </form>
   );

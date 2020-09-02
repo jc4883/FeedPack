@@ -1,0 +1,13 @@
+.leads-form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgrey;
+  padding: 5px;
+  text-align: center;
+}
+
+.leads-form__field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}

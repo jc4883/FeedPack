@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'leads.apps.LeadsConfig',
     'frontend.apps.FrontendConfig',
     'knox',
-    'accounts'
+    'accounts',
+    'feedback'
 ]
 
 MIDDLEWARE = [

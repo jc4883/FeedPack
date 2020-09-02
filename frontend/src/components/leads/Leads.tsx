@@ -29,20 +29,22 @@ const Leads = (props: ReduxProps) => {
   }, []);
 
   return (
-    <div>
-      {leads.map((lead, i) => {
-        const { id, email, message, name } = lead;
-        return (
-          <LeadsEntry
-            key={i}
-            name={name}
-            email={email}
-            message={message}
-            handleDelete={() => deleteLead(id)}
-          />
-        );
-      })}
+    <div className="leads">
       <Form handleSubmit={createLead} />
+      <div className="leads-entries">
+        {leads.map((lead, i) => {
+          const { id, email, message, name } = lead;
+          return (
+            <LeadsEntry
+              key={i}
+              name={name}
+              email={email}
+              message={message}
+              handleDelete={() => deleteLead(id)}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
