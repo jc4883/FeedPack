@@ -1,6 +1,8 @@
 import React from "react";
 import { Feedback } from "../types";
 
+import "./FeedbackEntry.scss";
+
 interface ComponentProps {
   feedback: Feedback;
 }
@@ -11,11 +13,11 @@ const FeedbackEntry = (props: ComponentProps) => {
   } = props;
 
   return (
-    <div>
-      <span>Name: {name}</span>
-      <span>Email: {email}</span>
-      <span>Comments: {comments}</span>
-      <span>num_stars: {num_stars}</span>
+    <div className="feedback-entry">
+      <span className="feedback-entry__detail">Name: {name}</span>
+      <span className="feedback-entry__detail">Email: {email}</span>
+      <span className="feedback-entry__detail">Comments: {comments}</span>
+      <span className="feedback-entry__detail">num_stars: {num_stars}</span>
     </div>
   );
 };

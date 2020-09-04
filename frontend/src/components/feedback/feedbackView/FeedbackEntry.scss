@@ -1,0 +1,14 @@
+.feedback-entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid lightgrey;
+  height: fit-content;
+  width: 75%;
+  padding: 10px;
+  margin: 10px;
+}
+
+.feedback-entry__detail {
+  margin: 3px;
+}

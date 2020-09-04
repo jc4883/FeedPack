@@ -9,6 +9,8 @@ import { Feedback } from "../types";
 
 import FeedbackEntry from "./FeedbackEntry";
 
+import "./FeedbackView.scss";
+
 interface ComponentProps {
   getFeedbacks: () => void;
   feedbacks: Feedback[];
@@ -22,7 +24,7 @@ const FeedbackView = (props: ComponentProps) => {
   }, [getFeedbacks]);
 
   return (
-    <div>
+    <div className="feedback-view">
       {feedbacks.map((feedback: Feedback, i) => {
         return <FeedbackEntry feedback={feedback} key={i} />;
       })}
