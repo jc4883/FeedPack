@@ -45,7 +45,7 @@ const Register = (props: ComponentProps) => {
   };
 
   return isAuthenticated ? (
-    <Redirect to="/" />
+    <Redirect to="/leads" />
   ) : (
     <div className="register">
       <h1 className="register__header">Register</h1>

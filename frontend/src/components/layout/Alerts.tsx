@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createElement } from "react";
 import { connect } from "react-redux";
 
 import { withAlert, AlertManager } from "react-alert";
@@ -17,6 +17,7 @@ interface ComponentProps {
   messages: {
     createdLead?: string;
     deletedLead?: string;
+    createdFeedback?: string;
   };
 }
 
@@ -28,7 +29,7 @@ const Alerts = ({ alert, errors, messages }: ComponentProps) => {
     username,
     message: errorMessage,
   } = errors;
-  const { createdLead, deletedLead } = messages;
+  const { createdLead, deletedLead, createdFeedback } = messages;
 
   useEffect(() => {
     email && alert.error("Email: " + email);
@@ -41,6 +42,7 @@ const Alerts = ({ alert, errors, messages }: ComponentProps) => {
   useEffect(() => {
     createdLead && alert.success(createdLead);
     deletedLead && alert.success(deletedLead);
+    createdFeedback && alert.success(createdFeedback);
   }, [messages]);
 
   return <React.Fragment />;

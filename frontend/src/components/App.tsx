@@ -11,6 +11,8 @@ import Header from "./header/Header";
 import Leads from "./leads/Leads";
 import Register from "./authentication/Register";
 import Login from "./authentication/Login";
+import FeedbackView from "./feedback/feedbackView/FeedbackView";
+import FeedbackForm from "./feedback/feedbackForm/FeedbackForm";
 
 import "./App.scss";
 
@@ -23,7 +25,9 @@ const App = () => {
     <div className="App">
       <Header />
       <Switch>
-        <PrivateRoute exact path="/" component={Leads} />
+        <PrivateRoute exact path="/feedback_view" component={FeedbackView} />
+        <PrivateRoute exact path="/leads" component={Leads} />
+        <Route exact path="/feedback_form/:user_id" component={FeedbackForm} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
       </Switch>

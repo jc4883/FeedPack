@@ -1,9 +1,11 @@
 import { Lead } from "../../components/leads/types";
+import { Feedback } from "../../components/feedback/types";
 
 export interface MyReduxState {
   messages: {
     createdLead?: string;
     deletedLead?: string;
+    createdFeedback?: string;
   };
   errors: {
     messages: {
@@ -16,6 +18,10 @@ export interface MyReduxState {
   };
   leads: {
     leads: Lead[];
+  };
+  feedbacks: {
+    feedbacks: Feedback[];
+    feedbackSubmitSuccess: boolean;
   };
   authentication: {
     token: string;

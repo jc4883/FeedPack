@@ -18,8 +18,11 @@ const Header = (props: ComponentProps) => {
 
   const authLinks = (
     <div className="header__links">
-      <Link className="header__links__link" to="/">
+      <Link className="header__links__link" to="/leads">
         Leads
+      </Link>
+      <Link className="header__links__link" to="/feedback_view">
+        Feedback
       </Link>
       <button className="header__links__link" onClick={logout}>
         Log Out

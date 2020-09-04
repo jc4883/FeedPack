@@ -39,7 +39,7 @@ const Login = (props: ComponentProps) => {
   };
 
   return isAuthenticated ? (
-    <Redirect to="/" />
+    <Redirect to="/leads" />
   ) : (
     <div className="login">
       <h1 className="login__header">Login</h1>
