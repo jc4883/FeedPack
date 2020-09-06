@@ -10,7 +10,7 @@ const Spinner = (props: ComponentProps) => {
   const { className, style } = props;
 
   return (
-    <div style={style} className={`spinner ${className}`}>
+    <div style={style} className={`spinner ${className ? className : ""}`}>
       <div className="loader" />
     </div>
   );

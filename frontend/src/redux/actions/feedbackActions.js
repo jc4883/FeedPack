@@ -48,13 +48,13 @@ export const createFeedback = (feedbackDetails) => (dispatch) => {
     method: "POST",
     body,
   };
-  fetch("api/feedbacks", config)
+  fetch("api/feedbacks/", config)
     .then((res) => {
       status = res.status;
       if (!res.ok) {
-        throw res.text();
+        throw res.json();
       } else {
-        return res.text();
+        return res.json();
       }
     })
     .then((data) => {
@@ -66,6 +66,7 @@ export const createFeedback = (feedbackDetails) => (dispatch) => {
       dispatch(receiveCreateFeedback(data));
     })
     .catch((err) => {
+      dispatch(getErrors(err, status));
       err.then((messages) => {
         dispatch(getErrors(messages, status));
       });

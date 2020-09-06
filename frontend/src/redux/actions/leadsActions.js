@@ -89,7 +89,6 @@ export const deleteLead = (id) => (dispatch, getState) => {
   config.method = "DELETE";
   dispatch(requestDelete(id));
   fetch(`api/lead/${id}`, config).then((res) => {
-    // TODO: dispatch createMessage on successful delete,
     dispatch(
       createMessage({
         deletedLead: "Successfully Deleted Lead",

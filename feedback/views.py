@@ -1,7 +1,6 @@
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, BasePermission, SAFE_METHODS
 from rest_framework.response import Response
-from rest_framework import views
-from rest_framework import status
+from rest_framework import status, views, viewsets
 
 from django.shortcuts import render
 from django.contrib.auth.models import User
@@ -9,21 +8,21 @@ from django.contrib.auth.models import User
 from .models import Feedback
 from .serializers import FeedbackSerializer
 
-class FeedbackList(views.APIView):
-    def get(self, request, format=None):
-        if request.user.is_anonymous:
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        feedbacks = request.user.feedbacks.all()
-        serializer = FeedbackSerializer(feedbacks, many=True)
-        return Response(serializer.data)
 
-    def post(self, request, format=None):
-        serializer = FeedbackSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class IsAuthenticatedOrWriteOnly(BasePermission):
+    def has_permission(self, request, view):
+        return (
+            request.method == 'POST' or
+            request.user and
+            request.user.is_authenticated
+        )
 
 
-    
+class FeedbackViewSet(viewsets.ModelViewSet):
+    # Used for get and delete
+    permission_classes = [IsAuthenticatedOrWriteOnly]
+    serializer_class = FeedbackSerializer
+    queryset = Feedback.objects.all()
 
+    def get_queryset(self):
+        return Feedback.objects.filter(recipient=self.request.user)

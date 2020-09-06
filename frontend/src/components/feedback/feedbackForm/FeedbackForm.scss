@@ -1,0 +1,50 @@
+.feedback-form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.feedback-form {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 70%;
+}
+
+.feedback-form__title {
+  width: 100%;
+}
+
+.feedback-form__field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px 0;
+}
+
+.feedback-form__comments-textarea {
+  width: 300px;
+  height: 100px;
+}
+
+.feedback-form__rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px 0;
+}
+
+.feedback-form__rating-all-options {
+  display: flex;
+}
+
+.feedback-form__rating-option {
+  display: flex;
+  flex-direction: column;
+  margin: 7px 15px;
+}
+
+.feedback-form__rating-option__radio {
+  margin: 0;
+}

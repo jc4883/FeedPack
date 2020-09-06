@@ -18,6 +18,7 @@ interface ComponentProps {
     createdLead?: string;
     deletedLead?: string;
     createdFeedback?: string;
+    createdFeedbackError?: string;
   };
 }
 
@@ -29,7 +30,12 @@ const Alerts = ({ alert, errors, messages }: ComponentProps) => {
     username,
     message: errorMessage,
   } = errors;
-  const { createdLead, deletedLead, createdFeedback } = messages;
+  const {
+    createdLead,
+    deletedLead,
+    createdFeedback,
+    createdFeedbackError,
+  } = messages;
 
   useEffect(() => {
     email && alert.error("Email: " + email);
@@ -43,6 +49,7 @@ const Alerts = ({ alert, errors, messages }: ComponentProps) => {
     createdLead && alert.success(createdLead);
     deletedLead && alert.success(deletedLead);
     createdFeedback && alert.success(createdFeedback);
+    createdFeedbackError && alert.error(createdFeedbackError);
   }, [messages]);
 
   return <React.Fragment />;

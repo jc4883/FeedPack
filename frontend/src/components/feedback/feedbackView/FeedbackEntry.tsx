@@ -9,11 +9,12 @@ interface ComponentProps {
 
 const FeedbackEntry = (props: ComponentProps) => {
   const {
-    feedback: { name, email, comments, num_stars },
+    feedback: { title, name, email, comments, num_stars },
   } = props;
 
   return (
     <div className="feedback-entry">
+      <span className="feedback-entry__detail">Title: {title}</span>
       <span className="feedback-entry__detail">Name: {name}</span>
       <span className="feedback-entry__detail">Email: {email}</span>
       <span className="feedback-entry__detail">Comments: {comments}</span>

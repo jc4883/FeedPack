@@ -6,6 +6,7 @@ export interface MyReduxState {
     createdLead?: string;
     deletedLead?: string;
     createdFeedback?: string;
+    createdFeedbackError?: string;
   };
   errors: {
     messages: {
@@ -21,7 +22,9 @@ export interface MyReduxState {
   };
   feedbacks: {
     feedbacks: Feedback[];
-    feedbackSubmitSuccess: boolean;
+    submittingFeedback: boolean;
+    successfullySubmitted: boolean;
+    submittedFeedback: Feedback;
   };
   authentication: {
     token: string;

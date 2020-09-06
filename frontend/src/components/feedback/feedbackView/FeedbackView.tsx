@@ -23,6 +23,20 @@ const FeedbackView = (props: ComponentProps) => {
     getFeedbacks();
   }, [getFeedbacks]);
 
+  const sortFeedbacks = (feedback: Feedback[]) => {
+    const compare = (feedback1: Feedback, feedback2: Feedback) => {
+      const date1 = new Date(feedback1.created_at);
+      const date2 = new Date(feedback2.created_at);
+      if (date1 > date2) {
+        return -1;
+      } else {
+        return 1;
+      }
+    };
+    feedback.sort(compare);
+  };
+  sortFeedbacks(feedbacks);
+
   return (
     <div className="feedback-view">
       {feedbacks.map((feedback: Feedback, i) => {

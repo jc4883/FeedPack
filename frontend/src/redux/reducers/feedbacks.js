@@ -7,7 +7,9 @@ import {
 
 const initial_state = {
   feedbacks: [],
-  feedbackSubmitSuccess: false,
+  submittingFeedback: false,
+  successfullySubmitted: false,
+  submittedFeedback: null,
 };
 
 export const feedbacks = (state = initial_state, action) => {
@@ -24,13 +26,16 @@ export const feedbacks = (state = initial_state, action) => {
     case REQUEST_CREATE_FEEDBACK: {
       return {
         ...state,
-        feedbackSubmitSuccess: false,
+        submittingFeedback: true,
+        successfullySubmitted: false,
       };
     }
     case RECIEVE_CREATE_FEEDBACK: {
       return {
         ...state,
-        feedbackSubmitSuccess: true,
+        submittingFeedback: false,
+        successfullySubmitted: true,
+        submittedFeedback: action.payload,
       };
     }
     default: {
